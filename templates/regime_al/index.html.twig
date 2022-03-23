@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}RegimeAL index
+{% endblock %}
+
+{% block body %}
+	<h1>RegimeAL index</h1>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Type</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for regime_a_l in regime_a_ls %}
+				<tr>
+					<td>{{ regime_a_l.id }}</td>
+					<td>{{ regime_a_l.type }}</td>
+					<td>
+						<a href="{{ path('regime_a_l_show', {'id': regime_a_l.id}) }}">
+							<button type="button" class="btn btn-outline-dark">show</button>
+						</a>
+						<a href="{{ path('regime_a_l_edit', {'id': regime_a_l.id}) }}">
+							<button type="button" class="btn btn-outline-secondary">edit</button>
+						</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="3">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<a href="{{ path('regime_a_l_new') }}">
+		<button type="button" class="btn btn-outline-success">Create new</button>
+	</a>
+{% endblock %}

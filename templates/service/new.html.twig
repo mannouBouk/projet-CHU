@@ -1,0 +1,12 @@
+{% block title %}New Service
+{% endblock %}
+
+{% block body %}
+
+	{% include  'base4.html.twig' %}
+	<!--{{ include('service/_form.html.twig') }}-->
+
+	<a href="{{ path('service_index') }}">
+		<button type="button" class="btn btn-outline-secondary">back to list</button>
+	</a>
+{% endblock %}
