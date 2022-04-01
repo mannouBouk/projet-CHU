@@ -1,48 +1,39 @@
-
-
-.card-body {
-    
-    width: 600px;
-    margin-top: 60px;
-    float: none; 
-    margin-bottom: 10px; /* Added */
+.card-body {   
     background: rgba(0, 0, 0, 0.8);
-    margin: 12% auto;
-    padding: 50px 0;
     color: #fff;
-    box-shadow: 0 0 20px 2px rgba(0, 0, 0, 0.5);
-}
+    box-shadow: 0 0 30px 3px rgba(0, 0, 0, 0.5);
+
+}  
+/*
 .input-group{
-    margin: 31px auto;
-    width: 80%;
-    border-bottom: 1px solid #fff  ;
+   margin: 50px auto;
+    width: 90%;
+    border-bottom: 2px solid #fff  ;
     padding-top: 10px;
     padding-bottom: 5px;
 }
+*/
+/*
 .input-group input{
     width: 90%;
     border: none;
     outline: none;
     background: transparent;
     color: #fff;
-}
+}*/
 ::placeholder{
     color: #ccc;
 }
 .login-btn  {
-    margin: 30px auto 100px;
-    width: 70%;
-    display: block;
-    outline: none;
-    padding: 10px 0;
+
     border: 1px solid #fff;
     cursor: pointer;
     background: transparent;
     color: #fff;
-    font-size: 15px;
-    margin-left: 220%;
+  
  
 }
+
 .btn{
     display: inline-block;
 }

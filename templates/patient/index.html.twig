@@ -12,8 +12,10 @@
 				<th>Id</th>
 				<th>Nom</th>
 				<th>Prenom</th>
-				<th>Service</th>
 				<th>Regime</th>
+				<th>service</th>
+				<th>Date entrée</th>
+				<th>Date Sortie</th>
 				<th>actions</th>
 			</tr>
 		</thead>
@@ -23,8 +25,10 @@
 					<td>{{ patient.id }}</td>
 					<td>{{ patient.nom }}</td>
 					<td>{{ patient.prenom }}</td>
-					<td>{{ patient.service }}</td>
 					<td>{{ patient.regime }}</td>
+					<td>{{ patient.service }}</td>
+					<td>{{ patient.dateEntree |date('d/m/Y')  }}</td>
+					<td>{{ patient.dateSortie |date('d/m/Y') }}</td>
 					<td>
 						<a href="{{ path('patient_show', {'id': patient.id}) }}">show</a>
 						<a href="{{ path('patient_edit', {'id': patient.id}) }}">edit</a>

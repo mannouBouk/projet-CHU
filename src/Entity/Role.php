@@ -22,10 +22,12 @@ class Role
      */
     private $label;
 
+
+
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $profilrole;
+    private $description;
 
     public function getId(): ?int
     {
@@ -44,14 +46,16 @@ class Role
         return $this;
     }
 
-    public function getProfilrole(): ?string
+
+
+    public function getDescription(): ?string
     {
-        return $this->profilrole;
+        return $this->description;
     }
 
-    public function setProfilrole(string $profilrole): self
+    public function setDescription(string $description): self
     {
-        $this->profilrole = $profilrole;
+        $this->description = $description;
 
         return $this;
     }

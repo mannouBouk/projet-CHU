@@ -55,6 +55,7 @@ class PatientController extends AbstractController
     {
         return $this->render('patient/show.html.twig', [
             'patient' => $patient,
+
         ]);
     }
 

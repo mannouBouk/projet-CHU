@@ -42,54 +42,64 @@
 
 		{% endblock %}
 
+
 	</head>
-	<body class="d-flex justify-content-center">
 
-		<div class="card-body login-card-body col-md-4">
-			<h1>
-				<p class="login-box-msg">
-					<b>Se connecter</b>
-				</p>
-			</h1>
-
-			<form action="test" method="post">
-				<div class="input-group mb-3">
-					<input type="text" class="form-control" placeholder="Nom d'utilisateur">
-					<div class="input-group-append">
-						<div class="input-group-text">
-							<span class="fas fa-envelope"></span>
-						</div>
-					</div>
-				</div>
-				<div class="input-group mb-3">
-					<input type="password" class="form-control" placeholder="Mot de passe">
-					<div class="input-group-append">
-						<div class="input-group-text">
-							<span class="fas fa-lock"></span>
-						</div>
-					</div>
-				</div>
-				<div
-					class="row">
-
-
-					<!-- /.col -->
-					<div class="col-4">
-
-						<a href="/hedicheker">
-							<button type="button" class="login-btn">
-								<b>
-									connexion
-								</b>
-							</button>
-						</a>
-
-
-					</div>
-
-				</div>
-			</form>
+	<body>
+		<div class=" row float-left ">
+			<img src="../dist/img/sante.png" alt="Logo_page" title="Accueil" id="logo" width="200px" height="120px"/>
 		</div>
+		<div class=" row float-right ">
+			<img src="../dist/img/hedicheker.png" alt="Logo_page" title="Accueil" id="logo" width="300px" height="120px"/>
+		</div>
+		<br><br><br><br><br><br><br><br>
+		<center>
+			<div class="card-body  d-flex justify-content-center  col-8" style=" margin:auto;">
+				<div class=" dflex p-6 " style=" margin:auto;">
+					<div class="text-center">
+						<h1 class="text-center">
 
+							<b>Se connecter</b>
+
+						</h1>
+					</div>
+					<br>
+					<br>
+					<form action="test" method="post" class="text-center " style="margin: auto; width: 500px ">
+						<div class="input-group  mb-3">
+							<input type="text" class="form-control" placeholder="Nom d'utilisateur">
+							<div class="input-group-append">
+								<div class="input-group-text">
+									<span class="fas fa-envelope"></span>
+								</div>
+							</div>
+						</div>
+						<br>
+
+						<div class="input-group  mb-3 ">
+							<input type="password" class="form-control" placeholder="Mot de passe">
+							<div class="input-group-append">
+								<div class="input-group-text">
+									<span class="fas fa-lock"></span>
+								</div>
+							</div>
+						</div>
+						<br>
+
+						<!-- /.col -->
+						<div class="col-20">
+
+							<a href="/hedicheker">
+								<button type="button" class="login-btn">
+									<b>
+										connexion
+									</b>
+								</button>
+							</a>
+						</div>
+					</form>
+				</div>
+			</div>
+		</center>
 	</body>
 </html>

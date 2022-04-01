@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ServiceRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -22,6 +24,17 @@ class Service
      */
     private $nom;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Patient::class, mappedBy="services")
+     */
+    private $patients;
+
+
+    public function __construct()
+    {
+        $this->patients = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -37,5 +50,37 @@ class Service
         $this->nom = $nom;
 
         return $this;
+    }
+
+    /**
+     * @return Collection|Patient[]
+     */
+    public function getPatients(): Collection
+    {
+        return $this->patients;
+    }
+
+    public function addPatient(Patient $patient): self
+    {
+        if (!$this->patients->contains($patient)) {
+            $this->patients[] = $patient;
+            $patient->addService($this);
+        }
+
+        return $this;
+    }
+
+    public function removePatient(Patient $patient): self
+    {
+        if ($this->patients->removeElement($patient)) {
+            $patient->removeService($this);
+        }
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->getNom();
     }
 }
