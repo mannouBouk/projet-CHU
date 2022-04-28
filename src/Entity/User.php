@@ -12,6 +12,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+    const ROLE_USER = 'ROLE_USER';
+    const ROLE_ADMIN = 'ROLE_ADMIN';
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -24,7 +26,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $username;
 
-
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $roles = [];
 
     /**
      * @var string The hashed password
@@ -69,8 +74,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
-
+        //$roles[] = 'ROLE_USER';
 
         return array_unique($roles);
     }
@@ -96,10 +100,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-    public function __toString()
-    {
-        return $this->username + $this->password + $this->roles;
-    }
+
     /**
      * Returning a salt is only needed, if you are not using a modern
      * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
@@ -118,5 +119,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+    public function isUser()
+    {
+        return in_array(self::ROLE_USER, $this->getRoles());
+    }
+    public function isAdmin()
+    {
+        return in_array(self::ROLE_ADMIN, $this->getRoles());
+    }
+    public function __toString()
+    {
+        return   $this->roles[0];
     }
 }

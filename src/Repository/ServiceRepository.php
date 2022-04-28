@@ -47,4 +47,23 @@ class ServiceRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function findAllPatientInService($id)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+
+        $Sql = 'SELECT p.id as id, p.prenom as prenom, p.nom as nom,
+            s.nom as nomService
+         FROM Patient p, Service s ,patient_service
+            where
+            s.id=patient_service.service_id
+            and 
+            p.id=patient_service.patient_id
+            and
+            s.id=' . $id;
+        $stmt = $conn->prepare($Sql);
+        $resultSet = $stmt->executeQuery();
+
+        return $resultSet->fetchAllAssociative();
+    }
 }

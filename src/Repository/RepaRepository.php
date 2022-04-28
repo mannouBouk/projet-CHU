@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Repas;
+use App\Entity\Repa;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Repas|null find($id, $lockMode = null, $lockVersion = null)
- * @method Repas|null findOneBy(array $criteria, array $orderBy = null)
- * @method Repas[]    findAll()
- * @method Repas[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Repa|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Repa|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Repa[]    findAll()
+ * @method Repa[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class RepasRepository extends ServiceEntityRepository
+class RepaRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Repas::class);
+        parent::__construct($registry, Repa::class);
     }
 
     // /**
-    //  * @return Repas[] Returns an array of Repas objects
+    //  * @return Repa[] Returns an array of Repa objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class RepasRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Repas
+    public function findOneBySomeField($value): ?Repa
     {
         return $this->createQueryBuilder('r')
             ->andWhere('r.exampleField = :val')

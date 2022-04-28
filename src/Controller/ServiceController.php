@@ -10,9 +10,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+
 
 /**
  * @Route("/service")
+ *  @IsGranted("ROLE_ADMIN",message="vous n'avez pas le droits d'accées")
  */
 class ServiceController extends AbstractController
 {
@@ -89,5 +92,19 @@ class ServiceController extends AbstractController
         }
 
         return $this->redirectToRoute('service_index', [], Response::HTTP_SEE_OTHER);
+    }
+    /**
+     * @Route("/{id}/detaile", name="service_detaile", methods={"GET"})
+     */
+
+    public function detaile(ServiceRepository $serviceRepository, Service $service): Response
+    {
+
+        //$id = ('service' => $request->query->get('id'));
+        $id = $service->getId();
+        return $this->render('service/detaile.html.twig', [
+
+            'services' => $serviceRepository->findAllPatientInService($id),
+        ]);
     }
 }

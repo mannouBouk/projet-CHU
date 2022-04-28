@@ -10,9 +10,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Classe\Totaux;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * @Route("/regime/a/l")
+ * @IsGranted("ROLE_ADMIN",message="vous n'avez pas le droits d'accées")
  */
 class RegimeALController extends AbstractController
 {
@@ -89,5 +92,24 @@ class RegimeALController extends AbstractController
         }
 
         return $this->redirectToRoute('regime_a_l_index', [], Response::HTTP_SEE_OTHER);
+    }
+    /**
+     * @Route("/{id}/detaile", name="regime_a_l_detaile", methods={"GET"})
+     */
+
+    public function detaile(RegimeALRepository $regimeALRepository, RegimeAL $regimeAL): Response
+    {
+        $id = $regimeAL->getId();
+        $t = $regimeALRepository->findOneByTotale($id);
+        $totale = new Totaux($t);
+
+
+
+
+        return $this->render('regime_al/detaile.html.twig', [
+
+            'regime_a_ls' => $regimeALRepository->findAllPatientInRegime($id),
+            't' => $totale->getTotale()
+        ]);
     }
 }

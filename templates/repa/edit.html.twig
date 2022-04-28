@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Repa{% endblock %}
+
+{% block body %}
+    <h1>Edit Repa</h1>
+
+    {{ include('repa/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('repa_index') }}">back to list</a>
+
+    {{ include('repa/_delete_form.html.twig') }}
+{% endblock %}

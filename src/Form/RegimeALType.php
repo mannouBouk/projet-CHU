@@ -12,8 +12,7 @@ class RegimeALType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('type')
-        ;
+            ->add('type');
     }
 
     public function configureOptions(OptionsResolver $resolver): void

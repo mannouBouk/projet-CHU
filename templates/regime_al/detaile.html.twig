@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Detaile patient
+{% endblock %}
+{% block body %}
+	<h1>
+		Détailes patient
+	</h1>
+	<table class="table">
+		<thead>
+
+			<tr>
+				<th>Id</th>
+				<th>Nom</th>
+				<th>Prénom</th>
+			</tr>
+
+		</thead>
+
+
+	</thead>
+	<tbody>
+		{% for regime_al in regime_a_ls %}
+			<tr>
+				<td>{{regime_al.id}}</td>
+				<td>{{regime_al.nom}}</td>
+				<td>{{regime_al.prenom}}</td>
+
+			</tr>
+
+		{% else %}
+			<tr>
+				<td colspan="3">no records found</td>
+			</tr>
+		{% endfor %}
+
+
+	</tbody>
+</table>
+<h4>Total</h4>
+<p>{{ t }}</p>{% endblock %}

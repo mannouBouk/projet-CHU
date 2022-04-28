@@ -29,10 +29,16 @@ class Service
      */
     private $patients;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=CadreMedicale::class, mappedBy="services")
+     */
+    private $cadreMedicales;
+
 
     public function __construct()
     {
         $this->patients = new ArrayCollection();
+        $this->cadreMedicales = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -82,5 +88,32 @@ class Service
     public function __toString()
     {
         return $this->getNom();
+    }
+
+    /**
+     * @return Collection|CadreMedicale[]
+     */
+    public function getCadreMedicales(): Collection
+    {
+        return $this->cadreMedicales;
+    }
+
+    public function addCadreMedicale(CadreMedicale $cadreMedicale): self
+    {
+        if (!$this->cadreMedicales->contains($cadreMedicale)) {
+            $this->cadreMedicales[] = $cadreMedicale;
+            $cadreMedicale->addService($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCadreMedicale(CadreMedicale $cadreMedicale): self
+    {
+        if ($this->cadreMedicales->removeElement($cadreMedicale)) {
+            $cadreMedicale->removeService($this);
+        }
+
+        return $this;
     }
 }

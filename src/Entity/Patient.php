@@ -31,10 +31,7 @@ class Patient
 
 
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $regime;
+
 
     /**
      * @ORM\Column(type="date", nullable=true)
@@ -56,6 +53,16 @@ class Patient
      */
     private $service;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=RegimeAL::class, inversedBy="patients")
+     */
+    private $regimes;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $regime;
+
 
 
 
@@ -65,6 +72,7 @@ class Patient
     public function __construct()
     {
         $this->services = new ArrayCollection();
+        $this->regimes = new ArrayCollection();
     }
 
 
@@ -106,17 +114,7 @@ class Patient
 
 
 
-    public function getRegime(): ?string
-    {
-        return $this->regime;
-    }
 
-    public function setRegime(string $regime): self
-    {
-        $this->regime = $regime;
-
-        return $this;
-    }
 
 
     public function getDateEntree(): ?\DateTimeInterface
@@ -177,6 +175,42 @@ class Patient
     public function setService(?string $service): self
     {
         $this->service = $service;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|RegimeAL[]
+     */
+    public function getRegimes(): Collection
+    {
+        return $this->regimes;
+    }
+
+    public function addRegime(RegimeAL $regime): self
+    {
+        if (!$this->regimes->contains($regime)) {
+            $this->regimes[] = $regime;
+        }
+
+        return $this;
+    }
+
+    public function removeRegime(RegimeAL $regime): self
+    {
+        $this->regimes->removeElement($regime);
+
+        return $this;
+    }
+
+    public function getRegime(): ?string
+    {
+        return $this->regime;
+    }
+
+    public function setRegime(?string $regime): self
+    {
+        $this->regime = $regime;
 
         return $this;
     }

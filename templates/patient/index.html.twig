@@ -20,25 +20,27 @@
 			</tr>
 		</thead>
 		<tbody>
-			{% for patient in patients %}
-				<tr>
-					<td>{{ patient.id }}</td>
-					<td>{{ patient.nom }}</td>
-					<td>{{ patient.prenom }}</td>
-					<td>{{ patient.regime }}</td>
-					<td>{{ patient.service }}</td>
-					<td>{{ patient.dateEntree |date('d/m/Y')  }}</td>
-					<td>{{ patient.dateSortie |date('d/m/Y') }}</td>
-					<td>
-						<a href="{{ path('patient_show', {'id': patient.id}) }}">show</a>
-						<a href="{{ path('patient_edit', {'id': patient.id}) }}">edit</a>
-					</td>
-				</tr>
+			{% if patients %}
+				{% for patient in patients %}
+					<tr>
+						<td>{{ patient.id }}</td>
+						<td>{{ patient.nom }}</td>
+						<td>{{ patient.prenom }}</td>
+						<td>{{ patient.typeRegime_al }}</td>
+						<td>{{patient.nomService}}</td>
+						<td>{{ patient.dateEntree |date('d/m/Y')  }}</td>
+						<td>{{ patient.dateSortie |date('d/m/Y') }}</td>
+						<td>
+							<a href="{{ path('patient_show', {'id': patient.id}) }}">show</a>
+							<a href="{{ path('patient_edit', {'id': patient.id}) }}">edit</a>
+						</td>
+					</tr>
+				{% endfor %}
 			{% else %}
 				<tr>
-					<td colspan="6">no records found</td>
+					<td colspan="8">no records found</td>
 				</tr>
-			{% endfor %}
+			{% endif %}
 		</tbody>
 	</table>
 

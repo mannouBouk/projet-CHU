@@ -10,9 +10,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * @Route("/patient")
+ * @IsGranted("ROLE_USER",message="vous n'avez pas le droits d'accées")
  */
 class PatientController extends AbstractController
 {
@@ -22,7 +24,7 @@ class PatientController extends AbstractController
     public function index(PatientRepository $patientRepository): Response
     {
         return $this->render('patient/index.html.twig', [
-            'patients' => $patientRepository->findAll(),
+            'patients' => $patientRepository->findAllPatient(),
         ]);
     }
 

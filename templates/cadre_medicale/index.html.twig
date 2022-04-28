@@ -1,0 +1,40 @@
+{% extends 'basee.html.twig' %}
+
+{% block title %}CadreMedicale index
+{% endblock %}
+
+{% block body %}
+	<h1>CadreMedicale index</h1>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Nom</th>
+				<th>Prenom</th>
+				<th>Service</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for cadre_medicale in cadre_medicales %}
+				<tr>
+					<td>{{ cadre_medicale.id }}</td>
+					<td>{{ cadre_medicale.nom }}</td>
+					<td>{{ cadre_medicale.prenom }}</td>
+					<td>{{ cadre_medicale.nomService }}</td>
+					<td>
+						<a href="{{ path('cadre_medicale_show', {'id': cadre_medicale.id}) }}">show</a>
+						<a href="{{ path('cadre_medicale_edit', {'id': cadre_medicale.id}) }}">edit</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="5">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<a href="{{ path('cadre_medicale_new') }}">Create new</a>
+{% endblock %}

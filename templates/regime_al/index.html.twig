@@ -19,12 +19,17 @@
 				<tr>
 					<td>{{ regime_a_l.id }}</td>
 					<td>{{ regime_a_l.type }}</td>
+
 					<td>
 						<a href="{{ path('regime_a_l_show', {'id': regime_a_l.id}) }}">
-							<button type="button" class="btn btn-outline-dark">show</button>
+							<button type="button" class="btn btn-outline-dark">Show</button>
 						</a>
 						<a href="{{ path('regime_a_l_edit', {'id': regime_a_l.id}) }}">
-							<button type="button" class="btn btn-outline-secondary">edit</button>
+							<button type="button" class="btn btn-outline-dark">Edit</button>
+
+							<a href="{{ path('regime_a_l_detaile', {'id': regime_a_l.id}) }}">
+								<button type="button" class="btn btn-outline-secondary">Détaile</button>
+							</a>
 						</a>
 					</td>
 				</tr>
@@ -37,6 +42,6 @@
 	</table>
 
 	<a href="{{ path('regime_a_l_new') }}">
-		<button type="button" class="btn btn-outline-success">Create new</button>
+		Create new
 	</a>
 {% endblock %}

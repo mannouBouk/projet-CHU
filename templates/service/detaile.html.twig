@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Detaile Service
+{% endblock %}
+{% block body %}
+	<h1>
+		Détailes Service
+	</h1>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Nom</th>
+				<th>Prénom</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for service in services %}
+				<tr>
+					<td>{{service.id}}</td>
+					<td>{{service.nom}}</td>
+					<td>{{service.prenom}}</td>
+
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="3">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}

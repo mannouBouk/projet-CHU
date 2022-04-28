@@ -4,7 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Patient;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\Mapping\Id;
+
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -54,17 +54,30 @@ class PatientRepository extends ServiceEntityRepository
     //  * @return Patient[] Returns an array of Patient objects
     //  */
 
-    public function findAllPatientWithServicesNames(): array
+
+    public function findAllPatient()
     {
-        $em = $this->getEntityManager();
-        $query = $em->createQuery(
-            'SELECT p.id as id,p.nom as nom, p.prenom as prenom,p.regime as regime,s.nom as service,p.date_entree as dateEntree,p.date_sortie as date_sortie 
-         FROM App\Entity\Service s, App\Entity\Patient p, patient_service
-        WHERE 
-        p.id=patient_service.patient_id 
-        AND 
-        s.id=patient_service.service_id'
-        );
-        return $query->getResult();
+        $conn = $this->getEntityManager()->getConnection();
+
+
+        $Sql = 'SELECT p.id as id, p.prenom as prenom, p.regime as regime, p.nom as nom, 
+        p.date_Entree as dateEntree, p.date_Sortie as dateSortie, s.nom as nomService , r.type as typeRegime_al
+         FROM patient p, service s, patient_service,regime_al r, patient_regime_al pr
+         where
+         s.id=patient_service.service_id
+            and 
+            p.id=patient_service.patient_id
+        and
+        r.id=pr.regime_al_id
+           AND
+            
+            p.id=pr.patient_id
+            
+
+         ';
+        $stmt = $conn->prepare($Sql);
+        $resultSet = $stmt->executeQuery();
+
+        return $resultSet->fetchAllAssociative();
     }
 }
