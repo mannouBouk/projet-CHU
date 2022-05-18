@@ -4,10 +4,15 @@
 {% endblock %}
 
 {% block body %}
-	<h1>User index</h1>
-
+	<h3>Utilisateur
+	</h3>
+	<div style="margin-bottom:2%;float:right">
+		<a href="{{ path('app_user_new') }}">
+			<button class="btn btn-success">Create new</button>
+		</a>
+	</div>
 	<table class="table">
-		<thead>
+		<thead style="background-color:midnightblue;color:white;">
 			<tr>
 				<th>Id</th>
 				<th>Username</th>
@@ -24,8 +29,16 @@
 					<td>{{ user.roles[0] }}</td>
 					<td>{{ user.password }}</td>
 					<td>
-						<a href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
-						<a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
+
+						<button class="btn btn-info">
+							<a href="{{ path('app_user_show', {'id': user.id}) }}" class="userButton">Show</a>
+						</button>
+
+
+						<button class="btn btn-primary">
+							<a href="{{ path('app_user_edit', {'id': user.id}) }}" class="userButton">Edit</a>
+						</button>
+
 					</td>
 				</tr>
 			{% else %}
@@ -36,5 +49,4 @@
 		</tbody>
 	</table>
 
-	<a href="{{ path('app_user_new') }}">Create new</a>
 {% endblock %}

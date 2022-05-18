@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}RepasServis index
+{% endblock %}
+
+{% block body %}
+	<h1>RepasServis index</h1>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				{# <th>DateHeure</th> #}
+
+				<th>nom</th>
+				<th>prenom</th>
+
+				<th>date entrée</th>
+				<th>date sortie</th>
+				<th>actions</th>
+				<th>Servis</th>
+
+			</tr>
+		</thead>
+		<tbody>
+			{% for repas_servi in repas %}
+				<tr>
+					<td>{{ repas_servi.id }}</td>
+					{# <td>{{ repas_servi.DateHeure ? repas_servi.DateHeure|date('Y-m-d H:i:s') : '' }}</td> #}
+					{# <td>{{ repas_servi.servis ? 'Yes' : 'No' }}</td> #}
+					<td>{{ repas_servi.nom }}</td>
+					<td>{{ repas_servi.prenom }}</td>
+					{# <td>{{ repas_servi.typeRegime_al }}</td> #}
+					{# <td>{{repas_servi.nomService}}</td> #}
+					<td>{{ repas_servi.date_entree |date('d/m/Y') }}</td>
+					<td>{{ repas_servi.date_sortie |date('d/m/Y') }}</td>
+					<td>
+						<a href="{{ path('app_repas_servis_show', {'id': repas_servi.id}) }}">show</a>
+						<a href="{{ path('app_repas_servis_edit', {'id': repas_servi.id}) }}">edit</a>
+					</td>
+					<td>
+						<form action="listeAction" method="get">
+
+
+							oui<input type='checkbox' checked name="id[]">
+							non<input type='checkbox'>
+
+						</from>
+
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="4">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<a href="{{ path('app_repas_servis_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% block body %}
+	<h1>Page not found</h1>
+
+	<p>
+		The requested page couldn't be located. Checkout for any URL
+
+	</p>
+	<p>
+		code de l'erreur:
+		{{status_code }}</p>
+	<p>
+		message de l'erreur
+		{{status_text}}</p>
+	<p>message pérsonaliser:
+		{{exception.message}}</p>
+{% endblock %}

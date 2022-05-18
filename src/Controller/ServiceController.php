@@ -107,4 +107,11 @@ class ServiceController extends AbstractController
             'services' => $serviceRepository->findAllPatientInService($id),
         ]);
     }
+
+
+    // public function getDeatials(Request $request, $id)
+    // {
+    //     $service = Service::all();
+    //     return $service;
+    // }
 }

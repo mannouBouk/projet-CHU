@@ -1,37 +1,77 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Repa index{% endblock %}
+{% block title %}Repa index
+{% endblock %}
 
 {% block body %}
-    <h1>Repa index</h1>
+	<h3>Repa index</h3>
+	<div style="margin-bottom:2%;float:right">
+		<a href="{{ path('repa_new') }}">
+			<button class="btn btn-success">Create new</button>
+		</a>
+	</div>
+	<table class="table">
+		<thead style="background-color:midnightblue;color:white;">
+			<tr>
+				<th>Id</th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th>Type</th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Type</th>
-                <th>Prix</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for repa in repas %}
-            <tr>
-                <td>{{ repa.id }}</td>
-                <td>{{ repa.type }}</td>
-                <td>{{ repa.prix }}</td>
-                <td>
-                    <a href="{{ path('repa_show', {'id': repa.id}) }}">show</a>
-                    <a href="{{ path('repa_edit', {'id': repa.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for repa in repas %}
+				<tr>
+					<td>{{ repa.id }}</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>{{ repa.type }}</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
 
-    <a href="{{ path('repa_new') }}">Create new</a>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>
+						<button class="btn btn-info">
+							<a href="{{ path('repa_show', {'id': repa.id}) }}" class="userButton">show</a>
+						</button>
+						<button class="btn btn-primary">
+							<a href="{{ path('repa_edit', {'id': repa.id}) }}" class="userButton">
+								<i class="fa-thin fa-pen-to-square"></i>edit</a>
+
+						</button>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="4">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
 {% endblock %}

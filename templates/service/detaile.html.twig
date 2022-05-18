@@ -1,5 +1,4 @@
 {% extends 'base.html.twig' %}
-
 {% block title %}Detaile Service
 {% endblock %}
 {% block body %}
@@ -7,11 +6,13 @@
 		Détailes Service
 	</h1>
 	<table class="table">
-		<thead>
+		<thead style="background-color:midnightblue;color:white;">
 			<tr>
 				<th>Id</th>
 				<th>Nom</th>
 				<th>Prénom</th>
+				<th>Date entrée</th>
+				<th>date Sortie</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -20,6 +21,8 @@
 					<td>{{service.id}}</td>
 					<td>{{service.nom}}</td>
 					<td>{{service.prenom}}</td>
+					<td>{{ service.dateSortie  }}</td>
+					<td>{{ service.dateSortie  }}</td>
 
 				</tr>
 			{% else %}

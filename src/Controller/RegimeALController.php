@@ -103,9 +103,6 @@ class RegimeALController extends AbstractController
         $t = $regimeALRepository->findOneByTotale($id);
         $totale = new Totaux($t);
 
-
-
-
         return $this->render('regime_al/detaile.html.twig', [
 
             'regime_a_ls' => $regimeALRepository->findAllPatientInRegime($id),

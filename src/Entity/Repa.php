@@ -25,18 +25,18 @@ class Repa
     private $type;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\OneToMany(targetEntity=Nomonclature::class, mappedBy="repa")
      */
-    private $prix;
+    private $nomonclatures;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=RegimeAL::class, inversedBy="repas")
-     */
-    private $repas;
+
+
+
 
     public function __construct()
     {
         $this->repas = new ArrayCollection();
+        $this->nomonclatures = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -56,17 +56,7 @@ class Repa
         return $this;
     }
 
-    public function getPrix(): ?float
-    {
-        return $this->prix;
-    }
 
-    public function setPrix(float $prix): self
-    {
-        $this->prix = $prix;
-
-        return $this;
-    }
 
     /**
      * @return Collection|RegimeAL[]
@@ -90,5 +80,39 @@ class Repa
         $this->repas->removeElement($repa);
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, Nomonclature>
+     */
+    public function getNomonclatures(): Collection
+    {
+        return $this->nomonclatures;
+    }
+
+    public function addNomonclature(Nomonclature $nomonclature): self
+    {
+        if (!$this->nomonclatures->contains($nomonclature)) {
+            $this->nomonclatures[] = $nomonclature;
+            $nomonclature->setRepa($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNomonclature(Nomonclature $nomonclature): self
+    {
+        if ($this->nomonclatures->removeElement($nomonclature)) {
+            // set the owning side to null (unless already changed)
+            if ($nomonclature->getRepa() === $this) {
+                $nomonclature->setRepa(null);
+            }
+        }
+
+        return $this;
+    }
+    public function __toString()
+    {
+        return  $this->getType();
     }
 }

@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}RepasServis{% endblock %}
+
+{% block body %}
+    <h1>RepasServis</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ repas_servi.id }}</td>
+            </tr>
+            <tr>
+                <th>DateHeure</th>
+                <td>{{ repas_servi.DateHeure ? repas_servi.DateHeure|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Servis</th>
+                <td>{{ repas_servi.servis ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_repas_servis_index') }}">back to list</a>
+
+    <a href="{{ path('app_repas_servis_edit', {'id': repas_servi.id}) }}">edit</a>
+
+    {{ include('repas_servis/_delete_form.html.twig') }}
+{% endblock %}

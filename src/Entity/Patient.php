@@ -6,6 +6,7 @@ use App\Repository\PatientRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=PatientRepository::class)
@@ -21,11 +22,21 @@ class Patient
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="Your name cannot contain a number"
+     * )
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="Your name cannot contain a number"
+     * )
      */
     private $prenom;
 
@@ -63,6 +74,16 @@ class Patient
      */
     private $regime;
 
+    /**
+     * @ORM\OneToMany(targetEntity=RepasServis::class, mappedBy="patient")
+     */
+    private $repasServis;
+
+    /**
+     * @ORM\OneToMany(targetEntity=RepasServis::class, mappedBy="patient")
+     */
+    private $RepaServi;
+
 
 
 
@@ -73,6 +94,8 @@ class Patient
     {
         $this->services = new ArrayCollection();
         $this->regimes = new ArrayCollection();
+        $this->repasServis = new ArrayCollection();
+        $this->RepaServi = new ArrayCollection();
     }
 
 
@@ -213,5 +236,69 @@ class Patient
         $this->regime = $regime;
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, RepasServis>
+     */
+    public function getRepasServis(): Collection
+    {
+        return $this->repasServis;
+    }
+
+    public function addRepasServi(RepasServis $repasServi): self
+    {
+        if (!$this->repasServis->contains($repasServi)) {
+            $this->repasServis[] = $repasServi;
+            $repasServi->setPatient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRepasServi(RepasServis $repasServi): self
+    {
+        if ($this->repasServis->removeElement($repasServi)) {
+            // set the owning side to null (unless already changed)
+            if ($repasServi->getPatient() === $this) {
+                $repasServi->setPatient(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, RepasServis>
+     */
+    public function getRepaServi(): Collection
+    {
+        return $this->RepaServi;
+    }
+
+    public function addRepaServi(RepasServis $repaServi): self
+    {
+        if (!$this->RepaServi->contains($repaServi)) {
+            $this->RepaServi[] = $repaServi;
+            $repaServi->setPatient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRepaServi(RepasServis $repaServi): self
+    {
+        if ($this->RepaServi->removeElement($repaServi)) {
+            // set the owning side to null (unless already changed)
+            if ($repaServi->getPatient() === $this) {
+                $repaServi->setPatient(null);
+            }
+        }
+
+        return $this;
+    }
+    public function __toString()
+    {
+        return   $this->getNom();
     }
 }

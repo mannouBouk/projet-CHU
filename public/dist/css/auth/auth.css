@@ -1,9 +1,10 @@
-.card-body {   
+.card-body {
     background: rgba(0, 0, 0, 0.8);
     color: #fff;
     box-shadow: 0 0 30px 3px rgba(0, 0, 0, 0.5);
 
-}  
+}
+
 /*
 .input-group{
    margin: 50px auto;
@@ -21,19 +22,20 @@
     background: transparent;
     color: #fff;
 }*/
-::placeholder{
+::placeholder {
     color: #ccc;
 }
-.login-btn  {
+
+.login-btn {
 
     border: 1px solid #fff;
     cursor: pointer;
     background: transparent;
     color: #fff;
-  
- 
+
+
 }
 
-.btn{
+.btn {
     display: inline-block;
 }

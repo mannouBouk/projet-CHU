@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nomonclature index
+{% endblock %}
+
+{% block body %}
+	<h3>Nomonclature
+	</h3>
+	<div style="margin-bottom:2%;float:right">
+		<a href="{{ path('app_nomonclature_new') }}">
+			<button type="button" class="btn btn-success">Create new</button>
+		</a>
+	</div>
+
+	<table class="table">
+		<thead style="background-color:midnightblue;color:white;">
+
+			<tr>
+
+
+				<th>Repa</th>
+				<th>Régime Alimentaire</th>
+				<th>Prix</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for nomonclature in nomonclatures %}
+				<tr>
+
+
+					<td>{{ nomonclature.typeRepa }}</td>
+					<td>{{ nomonclature.typeRegime_al }}</td>
+					<td>{{ nomonclature.prix }}</td>
+					<td>
+						<button type="button" class="btn btn-info">
+							<a href="{{ path('app_nomonclature_show', {'id': nomonclature.id}) }}" class="userButton">show</a>
+						</button>
+						<button type="button" class="btn btn-primary">
+							<a href="{{ path('app_nomonclature_edit', {'id': nomonclature.id}) }}" class="userButton">edit</a>
+						</button>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="3">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+{% endblock %}

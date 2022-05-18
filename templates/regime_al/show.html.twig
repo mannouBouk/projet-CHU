@@ -18,14 +18,14 @@
 			</tr>
 		</tbody>
 	</table>
-
-	<a href="{{ path('regime_a_l_index') }}">
-		back to list
-	</a>
-
-	<a href="{{ path('regime_a_l_edit', {'id': regime_a_l.id}) }}">
-		edit
-	</a>
-
-	{{ include('regime_al/_delete_form.html.twig') }}
-{% endblock %}
+	<div class="btn-group ml-3 float-right mb-2" role="groupe">
+		<a href="{{ path('regime_a_l_index') }}">
+			<button class="btn btn-outline-secondary">Back</button>
+		</a>
+		<div class="ml-2 mr-2">
+			{{ include('regime_al/_delete_form.html.twig') }}
+		</div>
+		<a href="{{ path('regime_a_l_edit', {'id': regime_a_l.id}) }}">
+			<button class="btn btn-outline-secondary">edit</button>
+		</a>
+	{% endblock %}

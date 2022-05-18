@@ -6,9 +6,18 @@
 {% block body %}
 	<h1>Edit Service</h1>
 
+
 	{{ include('service/_form.html.twig', {'button_label': 'Update'}) }}
 
-	<a href="{{ path('service_index') }}">back to list</a>
+	<div style="float:right">
+		<div class="btn-group ml-3 float-right mb-2" role="groupe">
+			{{ include('service/_delete_form.html.twig') }}
+		</div>
 
-	{{ include('service/_delete_form.html.twig') }}
-{% endblock %}
+		<div style="float:right">
+			<a href="{{ path('service_index') }}" class="userButton">
+				<button class="btn btn-outline-secondary">Back</button>
+			</a>
+		</div>
+
+	{% endblock %}

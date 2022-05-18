@@ -1,13 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Repa{% endblock %}
+{% block title %}Edit Repa
+{% endblock %}
 
 {% block body %}
-    <h1>Edit Repa</h1>
+	<h1>Edit Repa</h1>
 
-    {{ include('repa/_form.html.twig', {'button_label': 'Update'}) }}
+	{{ include('repa/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('repa_index') }}">back to list</a>
+	<div style="float:right">
+		<div class="btn-group ml-3 float-right mb-2" role="groupe">
+			{{ include('repa/_delete_form.html.twig') }}
+		</div>
 
-    {{ include('repa/_delete_form.html.twig') }}
-{% endblock %}
+		<div style="float:right">
+			<a href="{{ path('repa_index') }}" class="userButton">
+				<button class="btn btn-outline-secondary">Back</button>
+			</a>
+		</div>
+	{% endblock %}

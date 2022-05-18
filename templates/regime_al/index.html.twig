@@ -1,47 +1,109 @@
 {% extends 'base.html.twig' %}
-
 {% block title %}RegimeAL index
 {% endblock %}
 
 {% block body %}
-	<h1>RegimeAL index</h1>
-
+	<h3>Regime Alimentaire</h3>
+	<div style="margin-bottom:2%;float:right">
+		<a href="{{ path('regime_a_l_new') }}">
+			<button type="button" class="btn btn-success">Create new</button>
+		</a>
+	</div>
 	<table class="table">
-		<thead>
+		<thead style="background-color:midnightblue;color:white;">
 			<tr>
+				{# <th scope="col">#</th> #}
 				<th>Id</th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
 				<th>Type</th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
 				<th>actions</th>
 			</tr>
 		</thead>
 		<tbody>
 			{% for regime_a_l in regime_a_ls %}
-				<tr>
+				<tr scope="row">
 					<td>{{ regime_a_l.id }}</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
 					<td>{{ regime_a_l.type }}</td>
-
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
 					<td>
-						<a href="{{ path('regime_a_l_show', {'id': regime_a_l.id}) }}">
-							<button type="button" class="btn btn-outline-dark">Show</button>
-						</a>
-						<a href="{{ path('regime_a_l_edit', {'id': regime_a_l.id}) }}">
-							<button type="button" class="btn btn-outline-dark">Edit</button>
 
-							<a href="{{ path('regime_a_l_detaile', {'id': regime_a_l.id}) }}">
-								<button type="button" class="btn btn-outline-secondary">Détaile</button>
-							</a>
-						</a>
+						<button class="btn btn-info">
+							<a href="{{ path('regime_a_l_show', {'id': regime_a_l.id}) }}" class="userButton">Show</a>
+						</button>
+
+						<button class="btn btn-primary">
+							<a href="{{ path('regime_a_l_edit', {'id': regime_a_l.id}) }}" class="userButton">Edit</a>
+						</button>
+
+						<button class="btn btn-success">
+							<a href="{{ path('regime_a_l_detaile', {'id': regime_a_l.id}) }}" class="userButton">Détail</a>
+						</button>
+
 					</td>
-				</tr>
-			{% else %}
-				<tr>
-					<td colspan="3">no records found</td>
 				</tr>
 			{% endfor %}
 		</tbody>
-	</table>
-
-	<a href="{{ path('regime_a_l_new') }}">
-		Create new
-	</a>
-{% endblock %}
+	</tr>
+</tbody></table>{% endblock %}

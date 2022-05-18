@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Nomonclature
+{% endblock %}
+
+{% block body %}
+	<h1>Edit Nomonclature</h1>
+
+	{{ include('nomonclature/_form.html.twig', {'button_label': 'Update'}) }}
+	<div style="float:right">
+		<div class="btn-group ml-3 float-right mb-2" role="groupe">
+
+			{{ include('nomonclature/_delete_form.html.twig') }}
+		</div>
+	{% endblock %}

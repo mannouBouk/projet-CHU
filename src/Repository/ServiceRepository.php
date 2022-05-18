@@ -53,7 +53,7 @@ class ServiceRepository extends ServiceEntityRepository
 
 
         $Sql = 'SELECT p.id as id, p.prenom as prenom, p.nom as nom,
-            s.nom as nomService
+            s.nom as nomService, p.date_Entree as dateEntree, p.date_Sortie as dateSortie
          FROM Patient p, Service s ,patient_service
             where
             s.id=patient_service.service_id

@@ -35,10 +35,18 @@ class RegimeAL
      */
     private $patients;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Nomonclature::class, mappedBy="regime")
+     */
+    private $nomonclatures;
+
+
+
     public function __construct()
     {
         $this->repas = new ArrayCollection();
         $this->patients = new ArrayCollection();
+        $this->nomonclatures = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -114,5 +122,35 @@ class RegimeAL
     public function __toString()
     {
         return   $this->getType();
+    }
+
+    /**
+     * @return Collection<int, Nomonclature>
+     */
+    public function getNomonclatures(): Collection
+    {
+        return $this->nomonclatures;
+    }
+
+    public function addNomonclature(Nomonclature $nomonclature): self
+    {
+        if (!$this->nomonclatures->contains($nomonclature)) {
+            $this->nomonclatures[] = $nomonclature;
+            $nomonclature->setRegime($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNomonclature(Nomonclature $nomonclature): self
+    {
+        if ($this->nomonclatures->removeElement($nomonclature)) {
+            // set the owning side to null (unless already changed)
+            if ($nomonclature->getRegime() === $this) {
+                $nomonclature->setRegime(null);
+            }
+        }
+
+        return $this;
     }
 }

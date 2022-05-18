@@ -12,9 +12,7 @@ class RepaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('type')
-            ->add('prix')
-        ;
+            ->add('type');
     }
 
     public function configureOptions(OptionsResolver $resolver): void
