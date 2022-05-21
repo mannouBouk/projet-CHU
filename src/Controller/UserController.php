@@ -42,32 +42,6 @@ class UserController extends AbstractController
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
-
-        //$passChiffre = 
-
-        //debut
-
-        // ...
-        $passwordHasher = new UserPasswordHasher($passwordHasherFactory);
-
-        // Get the user password (e.g. from a registration form)
-        $user = new User();
-        $plaintextPassword = $user->getPassword();
-
-        // hash the password (based on the password hasher factory config for the $user class)
-        $hashedPassword = $passwordHasher->hashPassword(
-            $user,
-            $plaintextPassword
-        );
-        $user->setPassword($hashedPassword);
-
-        // In another action (e.g. to confirm deletion), you can verify the password
-        $plaintextPassword = $user->getPassword();
-        if (!$passwordHasher->isPasswordValid($user, $plaintextPassword)) {
-            throw new \Exception('Bad credentials, cannot delete this user.');
-        }
-
-        //fin
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($user);
             $entityManager->flush();
