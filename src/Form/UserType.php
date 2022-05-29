@@ -26,6 +26,7 @@ class UserType extends AbstractType
                 'choices'  => [
                     'User' => 'ROLE_USER',
                     'Admin' => 'ROLE_ADMIN',
+                    'Cuisinier' => 'ROLE_CUISINIER',
                 ],
             ])
             ->add('password');

@@ -5,9 +5,13 @@
 
 {% block body %}
 	<h1>CadreMedicale index</h1>
-
+	<div style="margin-bottom:2%;float:right">
+		<a href="{{ path('cadre_medicale_new') }}">
+			<button type="button" class="btn btn-success">Create new</button>
+		</a>
+	</div>
 	<table class="table">
-		<thead>
+		<thead style="background-color:midnightblue;color:white;">
 			<tr>
 				<th>Id</th>
 				<th>Nom</th>
@@ -24,8 +28,12 @@
 					<td>{{ cadre_medicale.prenom }}</td>
 					<td>{{ cadre_medicale.nomService }}</td>
 					<td>
-						<a href="{{ path('cadre_medicale_show', {'id': cadre_medicale.id}) }}">show</a>
-						<a href="{{ path('cadre_medicale_edit', {'id': cadre_medicale.id}) }}">edit</a>
+						<button type="button" class="btn btn-info">
+							<a href="{{ path('cadre_medicale_show', {'id': cadre_medicale.id}) }}" class="userButton">show</a>
+						</button>
+						<button type="button" class="btn btn-primary">
+							<a href="{{ path('cadre_medicale_edit', {'id': cadre_medicale.id}) }}" class="userButton">edit</a>
+						</button>
 					</td>
 				</tr>
 			{% else %}
@@ -36,5 +44,4 @@
 		</tbody>
 	</table>
 
-	<a href="{{ path('cadre_medicale_new') }}">Create new</a>
 {% endblock %}

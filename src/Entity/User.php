@@ -14,6 +14,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     const ROLE_USER = 'ROLE_USER';
     const ROLE_ADMIN = 'ROLE_ADMIN';
+    const ROLE_CUISINIER = 'ROLE_CUISINIER';
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -127,6 +128,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function isAdmin()
     {
         return in_array(self::ROLE_ADMIN, $this->getRoles());
+    }
+    public function isCuisinier()
+    {
+        return in_array(self::ROLE_CUISINIER, $this->getRoles());
     }
     public function __toString()
     {
