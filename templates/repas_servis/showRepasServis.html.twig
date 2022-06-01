@@ -4,14 +4,12 @@
 {% endblock %}
 
 {% block body %}
-	<center>
-		<h1>Repas Servis
-		</h1>
-	</center>
+	<h1>Repas Servis index</h1>
 
+	<a href="{{ path('app_repas_servis_index') }}">Retoure</a>
 
 	<table class="table">
-		<thead style="background-color:midnightblue;color:white;">
+		<thead>
 			<tr>
 				<th>Id</th>
 				<th>Nom</th>
@@ -20,7 +18,6 @@
 				<th>Service</th>
 				<th>Date d'entrée</th>
 				<th>Date de sortie</th>
-				<th>Servis</th>
 
 			</tr>
 		</thead>
@@ -28,32 +25,23 @@
 			{% for repas_servi in repas %}
 				<tr>
 					<td>{{ repas_servi.id }}</td>
-					{# <td>{{ repas_servi.DateHeure ? repas_servi.DateHeure|date('Y-m-d H:i:s') : '' }}</td> #}
-					{# <td>{{ repas_servi.servis ? 'Yes' : 'No' }}</td> #}
 					<td>{{ repas_servi.nom }}</td>
 					<td>{{ repas_servi.prenom }}</td>
 					<td>{{ repas_servi.regime }}</td>
 					<td>{{repas_servi.service}}</td>
 					<td>{{ repas_servi.date_entree |date('d/m/Y') }}</td>
 					<td>{{ repas_servi.date_sortie |date('d/m/Y') }}</td>
-					<td>
-						<form action="" method="get">
-							<div class="form-check form-switch">
-								<input class="form-check-input" type="checkbox" id="servi{{ repas_servi.id }}" onchange="changeServis('{{ repas_servi.id }}')">
-							</div>
-						</from>
-					</td>
-
 				</tr>
 			{% else %}
 				<tr>
 					<td colspan="4">no records found</td>
 				</tr>
 			{% endfor %}
-
 		</tbody>
 	</table>
-	<button class="btn btn-success">
-		<a href="{{ path('app_repas_servis_valide_show') }}" class="userButton">Valider</a>
-	</button>
+
+{% endblock %}
+
+{% block javascripts %}
+	<script type="text/javascript"></script>
 {% endblock %}

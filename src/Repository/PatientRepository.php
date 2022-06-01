@@ -65,16 +65,9 @@ class PatientRepository extends ServiceEntityRepository
          FROM patient p, service s, patient_service,regime_al r, patient_regime_al pr
          where
          s.id=patient_service.service_id
-            and 
-            p.id=patient_service.patient_id
-        and
-        r.id=pr.regime_al_id
-           AND
-            
-            p.id=pr.patient_id
-            
-
-         ';
+            and p.id=patient_service.patient_id
+        and  r.id=pr.regime_al_id
+           AND p.id=pr.patient_id  ';
         $stmt = $conn->prepare($Sql);
         $resultSet = $stmt->executeQuery();
 

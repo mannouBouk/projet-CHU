@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Patient;
 
 /**
  * @Route("/repas/servis")
@@ -22,6 +23,15 @@ class RepasServisController extends AbstractController
     {
         return $this->render('repas_servis/index.html.twig', [
             'repas' => $repasServisRepository->findAllPatientServis(),
+        ]);
+    }
+    /**
+     * @Route("/repas_servis", name="app_repas_servis_valide_show", methods={"GET"})
+     */
+    public function showRepasServis(RepasServisRepository $repasServisRepository): Response
+    {
+        return $this->render('repas_servis/showRepasServis.html.twig', [
+            'repas' => $repasServisRepository->findAllRepasServis(),
         ]);
     }
 
@@ -80,6 +90,24 @@ class RepasServisController extends AbstractController
     public function delete(Request $request, RepasServis $repasServi, RepasServisRepository $repasServisRepository): Response
     {
         if ($this->isCsrfTokenValid('delete' . $repasServi->getId(), $request->request->get('_token'))) {
+            $repasServisRepository->remove($repasServi);
+        }
+
+        return $this->redirectToRoute('app_repas_servis_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+
+    /**
+     * @Route("/changeServis/{id}/{servis}", name="change_repas_servis", methods={"POST"})
+     */
+    public function changeServis(Patient $patient, bool $servis, RepasServisRepository $repasServisRepository): Response
+    {
+
+        dd($patient);
+        if ($servis == true) {
+            $res = $repasServisRepository->insertServisPatient($patient->getId());
+        } else {
+            $repasServi = $repasServisRepository->findOneByPatient($patient->getId());
             $repasServisRepository->remove($repasServi);
         }
 
