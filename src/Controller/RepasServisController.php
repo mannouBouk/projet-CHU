@@ -12,8 +12,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Patient;
 
 /**
- * @Route("/repas/servis")
+ * @Route("/repas_servis")
  */
+
 class RepasServisController extends AbstractController
 {
     /**
@@ -25,6 +26,8 @@ class RepasServisController extends AbstractController
             'repas' => $repasServisRepository->findAllPatientServis(),
         ]);
     }
+
+
     /**
      * @Route("/repas_servis", name="app_repas_servis_valide_show", methods={"GET"})
      */
@@ -96,19 +99,17 @@ class RepasServisController extends AbstractController
         return $this->redirectToRoute('app_repas_servis_index', [], Response::HTTP_SEE_OTHER);
     }
 
-
     /**
      * @Route("/changeServis/{id}/{servis}", name="change_repas_servis", methods={"POST"})
      */
     public function changeServis(Patient $patient, bool $servis, RepasServisRepository $repasServisRepository): Response
     {
-
-        dd($patient);
         if ($servis == true) {
             $res = $repasServisRepository->insertServisPatient($patient->getId());
-        } else {
+        }else{
             $repasServi = $repasServisRepository->findOneByPatient($patient->getId());
             $repasServisRepository->remove($repasServi);
+            
         }
 
         return $this->redirectToRoute('app_repas_servis_index', [], Response::HTTP_SEE_OTHER);

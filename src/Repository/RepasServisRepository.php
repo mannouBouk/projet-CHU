@@ -64,26 +64,16 @@ class RepasServisRepository extends ServiceEntityRepository
     }
     */
 
-    /*
-    public function findOneBySomeField($value): ?RepasServis
-    {
-        return $this->createQueryBuilder('r')
-            ->andWhere('r.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
+
     public function findOneByPatient($value): ?RepasServis
     {
         return $this->createQueryBuilder('r')
             ->andWhere('r.patient_id = :val')
             ->setParameter('val', $value)
             ->getQuery()
-            ->getOneOrNullResult();
+            ->getOneOrNullResult()
+        ;
     }
-
 
     public function findAllPatientServis()
     {
@@ -134,8 +124,6 @@ class RepasServisRepository extends ServiceEntityRepository
             $status = 1;
         else
             $status = 0;
-
-
 
         return $status;
     }

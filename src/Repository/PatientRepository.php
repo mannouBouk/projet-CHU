@@ -4,7 +4,6 @@ namespace App\Repository;
 
 use App\Entity\Patient;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -38,17 +37,24 @@ class PatientRepository extends ServiceEntityRepository
     }
     */
 
-    /*
-    public function findOneBySomeField($value): ?Patient
+    
+    public function findOneByIdRegime($id)
     {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $conn = $this->getEntityManager()->getConnection();
+
+
+        $Sql = "SELECT `patient`.* , `regime_al`.`type` AS 'regime', `service`.`nom` AS 'service' , `repas_servis`.`date_heure` AS 'date_Servi' 
+                FROM `patient`, `patient_regime_al`, `regime_al`, `patient_service`, `service`, `repas_servis`
+                WHERE `patient_regime_al`.`patient_id` = `patient`.`id` 
+                AND `patient_regime_al`.`regime_al_id` = `regime_al`.`id` 
+                AND `patient_service`.`patient_id` = `patient`.`id` 
+                AND `patient_service`.`service_id` = `service`.`id`
+                AND `patient`.`id` = '".$id."';";
+        $stmt = $conn->prepare($Sql);
+        $resultSet = $stmt->executeQuery();
+
+        return $resultSet->fetchAllAssociative();
     }
-    */
 
     // /**
     //  * @return Patient[] Returns an array of Patient objects
@@ -60,14 +66,12 @@ class PatientRepository extends ServiceEntityRepository
         $conn = $this->getEntityManager()->getConnection();
 
 
-        $Sql = 'SELECT p.id as id, p.prenom as prenom, p.regime as regime, p.nom as nom, 
-        p.date_Entree as dateEntree, p.date_Sortie as dateSortie, s.nom as nomService , r.type as typeRegime_al
-         FROM patient p, service s, patient_service,regime_al r, patient_regime_al pr
-         where
-         s.id=patient_service.service_id
-            and p.id=patient_service.patient_id
-        and  r.id=pr.regime_al_id
-           AND p.id=pr.patient_id  ';
+        $Sql = "SELECT `patient`.* , `regime_al`.`type` AS 'regime', `service`.`nom` AS 'service' , `repas_servis`.`date_heure` AS 'date_Servi' 
+                FROM `patient`, `patient_regime_al`, `regime_al`, `patient_service`, `service`, `repas_servis`
+                WHERE `patient_regime_al`.`patient_id` = `patient`.`id` 
+                AND `patient_regime_al`.`regime_al_id` = `regime_al`.`id` 
+                AND `patient_service`.`patient_id` = `patient`.`id` 
+                AND `patient_service`.`service_id` = `service`.`id`;";
         $stmt = $conn->prepare($Sql);
         $resultSet = $stmt->executeQuery();
 

@@ -55,10 +55,13 @@ class PatientController extends AbstractController
     /**
      * @Route("/{id}", name="patient_show", methods={"GET"})
      */
-    public function show(PatientRepository $patientRepository): Response
+    public function show(Patient $patient, PatientRepository $repositoryPatient): Response
     {
+
+        $patient1 = $repositoryPatient->findOneByIdRegime($patient->getId());
+        var_dump($patient1);
         return $this->render('patient/show.html.twig', [
-            'patient' => $patientRepository->findAllPatient(),
+            'patient' => $patient1[0],
 
         ]);
     }
