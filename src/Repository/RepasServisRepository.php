@@ -64,26 +64,71 @@ class RepasServisRepository extends ServiceEntityRepository
     }
     */
 
-    /*
-    public function findOneBySomeField($value): ?RepasServis
+
+    public function findOneByPatient($value): ?RepasServis
     {
         return $this->createQueryBuilder('r')
-            ->andWhere('r.exampleField = :val')
+            ->andWhere('r.patient_id = :val')
             ->setParameter('val', $value)
             ->getQuery()
             ->getOneOrNullResult()
         ;
     }
-    */
+    
+
     public function findAllPatientServis()
     {
         $conn = $this->getEntityManager()->getConnection();
 
 
-        $Sql = 'SELECT * FROM patient';
+        $Sql = "SELECT `patient`.* , `regime_al`.`type` AS 'regime', `service`.`nom` AS 'service' 
+                FROM `patient`, `patient_regime_al`, `regime_al`, `patient_service`, `service` 
+                WHERE `patient_regime_al`.`patient_id` = `patient`.`id` 
+                AND `patient_regime_al`.`regime_al_id` = `regime_al`.`id` 
+                AND `patient_service`.`patient_id` = `patient`.`id` 
+                AND `patient_service`.`service_id` = `service`.`id`;";
         $stmt = $conn->prepare($Sql);
         $resultSet = $stmt->executeQuery();
 
         return $resultSet->fetchAllAssociative();
     }
+
+    public function findAllRepasServis()
+    {
+
+        $conn = $this->getEntityManager()->getConnection();
+
+        $Sql = "SELECT `patient`.* , `regime_al`.`type` AS 'regime', `service`.`nom` AS 'service' , `repas_servis`.`date_heure` AS 'date_Servi' 
+                FROM `patient`, `patient_regime_al`, `regime_al`, `patient_service`, `service`, `repas_servis`
+                WHERE `patient_regime_al`.`patient_id` = `patient`.`id` 
+                AND `patient_regime_al`.`regime_al_id` = `regime_al`.`id` 
+                AND `patient_service`.`patient_id` = `patient`.`id` 
+                AND `patient_service`.`service_id` = `service`.`id`
+                AND `patient`.`id`  = `repas_servis`.`patient_id`;";
+        $stmt = $conn->prepare($Sql);
+        $resultSet = $stmt->executeQuery();
+
+        return $resultSet->fetchAllAssociative();
+    }
+
+    /**
+     * @throws ORMException
+     * @throws OptimisticLockException
+     */
+    public function insertServisPatient($patient_id)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $Sql = "INSERT INTO `repas_servis`(`date_heure`, `patient_id`, `servis`) VALUES (NOW(),'$patient_id',b'1');";
+
+        if($conn->prepare($Sql))
+            $status = 1;
+        else
+            $status = 0;
+
+        
+
+        return $status;
+    }
+    
 }

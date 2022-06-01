@@ -8,7 +8,6 @@
 		</title>
 		{# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
 		{% block stylesheets %}
-			{{ encore_entry_link_tags('app') }}
 			<script src="/plugins/jquery/jquery.min.js"></script>
 			<!-- Font Awesome -->
 			<link
@@ -34,7 +33,6 @@
 		{% endblock %}
 
 		{% block javascripts %}
-			{{ encore_entry_script_tags('app') }}
 
 			<script src="/plugins/jquery/jquery.min.js"></script>
 			<!-- Bootstrap 4 -->
@@ -126,7 +124,7 @@
 							</h6>
 						</b>
 					</a>
-					<a href="/regime/a/l" class="nav-link" style="color:white;">
+					<a href="/regime" class="nav-link" style="color:white;">
 						<b>
 							<h6>
 								<em>
@@ -162,7 +160,7 @@
 							</h6>
 						</b>
 					</a>
-					<a href="/repas/servis" class="nav-link aaa" style="color:white;">
+					<a href="/repas_servis" class="nav-link aaa" style="color:white;">
 						<b>
 							<h6>
 								<em>
@@ -210,4 +208,28 @@
 			</section>
 		</body>
 	</body>
+
+    <script type="text/javascript">
+
+        function changeServis(id) {
+			
+			let servis;
+
+			if(document.getElementById("servi"+id).checked){
+                servis = 1;
+			}else{
+                servis = 0;
+			}
+
+            $.ajax({ 
+                type: 'POST', 
+                url: "/repas_servis/changeServis/"+id+"/"+servis,
+                dataType: 'json',
+                success: function (data) {  
+                    console.log(data);
+                }
+            });
+		}
+
+    </script>
 </html>

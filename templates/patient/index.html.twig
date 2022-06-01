@@ -28,10 +28,10 @@
 					<tr>
 						<td>{{ patient.nom }}</td>
 						<td>{{ patient.prenom }}</td>
-						<td>{{ patient.typeRegime_al }}</td>
-						<td>{{patient.nomService}}</td>
-						<td>{{ patient.dateEntree |date('d/m/Y') }}</td>
-						<td>{{ patient.dateSortie |date('d/m/Y') }}</td>
+						<td>{{ patient.regime }}</td>
+						<td>{{patient.service}}</td>
+						<td>{{ patient.date_entree }}</td>
+						<td>{{ patient.date_sortie }}</td>
 						<td>
 							<button type="button" class="btn btn-info">
 								<a href="{{ path('patient_show', {'id': patient.id}) }}" class="userButton">show</a>

@@ -14,7 +14,7 @@ use App\Classe\Totaux;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
- * @Route("/regime/a/l")
+ * @Route("/regime")
  * @IsGranted("ROLE_ADMIN" ,message="vous n'avez pas le droits d'accées")
  */
 class RegimeALController extends AbstractController
