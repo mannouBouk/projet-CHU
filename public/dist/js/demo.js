@@ -424,3 +424,8 @@
     $(this).addClass('active');
   });
 })(jQuery)
+
+
+let select = document.querySelector(".form-select");
+console.log(select);
+select.multiple = false;

@@ -6,6 +6,9 @@ use App\Entity\CadreMedicale;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class CadreMedicaleType extends AbstractType
 {
@@ -14,7 +17,19 @@ class CadreMedicaleType extends AbstractType
         $builder
             ->add('nom')
             ->add('prenom')
-            ->add('services');
+            ->add(
+                'services',
+                ChoiceType::class,
+                [
+                    'choices' => [
+                        'endocrino' => 1,
+                        'neurologie' => 2,
+                        'pédiatrie' => 3,
+                        'gastrologie' => 4,
+                    ],
+                    'multiple' => false,
+                ]
+            );
     }
 
     public function configureOptions(OptionsResolver $resolver): void

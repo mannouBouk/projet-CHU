@@ -4,12 +4,13 @@ namespace App\Controller;
 
 use App\Entity\RepasServis;
 use App\Form\RepasServisType;
+use App\Entity\Patient;
 use App\Repository\RepasServisRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\Patient;
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * @Route("/repas_servis")
@@ -100,15 +101,34 @@ class RepasServisController extends AbstractController
     }
 
     /**
-     * @Route("/changeServis/{id}/{servis}", name="change_repas_servis", methods={"POST"})
+     * @Route("/changeServis/{id}/{servis}", name="change_repas_servis", methods={"GET","POST","PUT"})
      */
-    public function changeServis(Patient $patient, bool $servis, RepasServisRepository $repasServisRepository): Response
+    public function changeServis(
+        Patient $patient, 
+        bool $servis, 
+        int $status = 0,  
+        RepasServisRepository $repasServisRepository,
+        EntityManagerInterface $em
+    ): Response
     {
+
         if ($servis == true) {
-            $res = $repasServisRepository->insertServisPatient($patient->getId());
+            $status = $repasServisRepository->insertServisPatient($patient->getId());
+            $repasServi = new RepasServis();
+            $repasServi->setPatient($patient);
+            $repasServi->setServis('1');
+            $repasServi->setDateHeure(new \DateTime());
+            $repasServisRepository->add($repasServi);
         }else{
             $repasServi = $repasServisRepository->findOneByPatient($patient->getId());
-            $repasServisRepository->remove($repasServi);
+            foreach($repasServi as $repas){
+                $repasS = $repasServisRepository->find($repas['id']);
+                $repasS->setServis('0');
+                $em->flush();
+            
+
+                
+            }
             
         }
 
