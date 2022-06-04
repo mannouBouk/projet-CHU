@@ -113,22 +113,19 @@ class RepasServisRepository extends ServiceEntityRepository
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function insertServisPatient($patient_id):void
+    public function insertServisPatient($patient_id)
     {
 
         $conn = $this->getEntityManager()->getConnection();
 
         $sql = "INSERT INTO `repas_servis`(`date_heure`, `patient_id`, `servis`) VALUES (NOW(),'" . $patient_id . "',b'1');";
         $conn->prepare($sql);
-
-<<<<<<< HEAD
-        if ($conn->prepare($Sql))
+        if ($conn->prepare($sql))
             $status = 1;
         else
             $status = 0;
 
         return $status;
-=======
->>>>>>> 338162e (travaill fakher - complete)
+
     }
 }
